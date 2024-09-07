@@ -36,11 +36,11 @@ Make sure to replace `main.py` with the appropriate entry point of your applicat
 Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 - [CAPM Theory](https://en.wikipedia.org/wiki/Capital_asset_pricing_model)
 - [Python Libraries](https://www.python.org/)
 
 ## Contact
-For any inquiries, please reach out to [your-email@example.com](mailto:i.am.hrishin@gmail.com).
+For any inquiries, please reach out to [i.am.hrishin@gmail.com](mailto:i.am.hrishin@gmail.com).
