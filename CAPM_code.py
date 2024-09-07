@@ -3,6 +3,7 @@ import streamlit as st
 import datetime
 import yfinance as yf
 import CAPM_functions
+from concurrent.futures import ThreadPoolExecutor
 
 st.set_page_config(page_title='CAPM', page_icon="chart_with_upwards_trend", layout="wide")
 st.title("Capital Asset Pricing Model")
