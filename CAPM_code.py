@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import datetime
 import yfinance as yf
-import CAPM_VIZZ
+import CAPM_functions
 from concurrent.futures import ThreadPoolExecutor
 
 st.set_page_config(page_title='CAPM', page_icon="chart_with_upwards_trend", layout="wide")
@@ -62,14 +62,14 @@ try:
     col1, col2 = st.columns([1, 1])
     with col1:
         st.markdown('### Price of all the Stocks')
-        st.plotly_chart(CAPM_VIZZ.plots(stocks_df),use_container_width=True)
+        st.plotly_chart(CAPM_functions.plots(stocks_df),use_container_width=True)
     with col2:
         st.markdown('### Price of all the Stocks After Normalization')
-        st.plotly_chart(CAPM_VIZZ.plots(CAPM_VIZZ.normalized(stocks_df)),use_container_width=True)
+        st.plotly_chart(CAPM_functions.plots(CAPM_functions.normalized(stocks_df)),use_container_width=True)
 
     # Multi-threaded daily return calculation for faster execution
     def calculate_returns():
-        return CAPM_VIZZ.daily_return(stocks_df)
+        return CAPM_functions.daily_return(stocks_df)
     
     with ThreadPoolExecutor() as executor:
         future = executor.submit(calculate_returns)
@@ -81,7 +81,7 @@ try:
     
     def calculate_beta_alpha(stock):
         if stock in stocks_daily_return.columns:
-            return CAPM_VIZZ.calculate_beta(stocks_daily_return, stock)
+            return CAPM_functions.calculate_beta(stocks_daily_return, stock)
     
     # Using threads to calculate beta and alpha for each stock
     with ThreadPoolExecutor() as executor:
@@ -119,7 +119,7 @@ try:
     # New Feature: Calculate and display Sharpe Ratios
     col1, col2 = st.columns([1, 1])
 
-    sharpe_ratios = CAPM_VIZZ.calculate_sharpe_ratio(stocks_daily_return)
+    sharpe_ratios = CAPM_functions.calculate_sharpe_ratio(stocks_daily_return)
     sharpe_df = pd.DataFrame({'Stock': list(sharpe_ratios.keys()), 'Sharpe Ratio': [str(round(s, 2)) for s in sharpe_ratios.values()]})
     with col1:
 
@@ -127,7 +127,7 @@ try:
         st.dataframe(sharpe_df, use_container_width=True)
 
     # New Feature: Calculate and display Volatility
-    volatility = CAPM_VIZZ.calculate_volatility(stocks_daily_return)
+    volatility = CAPM_functions.calculate_volatility(stocks_daily_return)
     volatility_df = pd.DataFrame({'Stock': list(volatility.keys()), 'Volatility': [str(round(v, 2)) for v in volatility.values()]})
     with col2:
 
@@ -140,10 +140,10 @@ try:
     st.markdown("The cumulative returns of the selected stocks over the specified period:")
 
 # Calculate cumulative returns using the function from CAPM_VIZZ
-    cumulative_returns = CAPM_VIZZ.calculate_cumulative_returns(stocks_df)
+    cumulative_returns = CAPM_functions.calculate_cumulative_returns(stocks_df)
 
 # Plot the cumulative returns in a larger, fully visible section
-    st.plotly_chart(CAPM_VIZZ.plot_cumulative_returns(cumulative_returns), use_container_width=True)
+    st.plotly_chart(CAPM_functions.plot_cumulative_returns(cumulative_returns), use_container_width=True)
 
 
 except Exception as e:
