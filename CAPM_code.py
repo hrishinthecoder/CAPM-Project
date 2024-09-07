@@ -3,7 +3,6 @@ import streamlit as st
 import datetime
 import yfinance as yf
 import CAPM_functions
-from concurrent.futures import ThreadPoolExecutor
 
 st.set_page_config(page_title='CAPM', page_icon="chart_with_upwards_trend", layout="wide")
 st.title("Capital Asset Pricing Model")
@@ -14,7 +13,7 @@ with col1:
     stocks_list = st.multiselect("Choose 4 stocks", ('TSLA', 'AAPL', 'NFLX', 'MSFT', 'MGM', 'AMZN', 'NVDA', 'GOOGL'),
                                  ['TSLA', 'AAPL', 'AMZN', 'GOOGL'])
 with col2:
-    year = st.number_input("Number of Years", 1, 100)
+    year = st.number_input("Number of Years", 1, 500)
 
 try:
     # Optimizing API calls by downloading all stock data at once
@@ -147,4 +146,4 @@ try:
 
 
 except Exception as e:
-        st.title("An error has occured. Please select the valid Input.")
+     st.markdown("<h1 style='color: red;'>Cannot show further. Give a valid input.</h1>", unsafe_allow_html=True)
