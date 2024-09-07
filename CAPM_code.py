@@ -14,7 +14,7 @@ with col1:
     stocks_list = st.multiselect("Choose 4 stocks", ('TSLA', 'AAPL', 'NFLX', 'MSFT', 'MGM', 'AMZN', 'NVDA', 'GOOGL'),
                                  ['TSLA', 'AAPL', 'AMZN', 'GOOGL'])
 with col2:
-    year = st.number_input("Number of Years", 1, 10)
+    year = st.number_input("Number of Years", 1, 100)
 
 try:
     # Optimizing API calls by downloading all stock data at once
@@ -147,4 +147,4 @@ try:
 
 
 except Exception as e:
-    st.write("An error has occurred. The error is", e)
+        st.title("An error has occured. Please select the valid Input.")
